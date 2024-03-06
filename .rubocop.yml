@@ -1,0 +1,30 @@
+require:
+  - rubocop-rspec
+  - rubocop-faker
+  - rubocop-rails
+  - rubocop-performance
+  - test_prof/rubocop
+
+Style/StringLiterals:
+  Description: "Checks if uses of quotes match the configured preference."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#consistent-string-literals"
+  EnforcedStyle: double_quotes
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+AllCops:
+  NewCops: disable
+  Exclude:
+    - "vendor/**/*"
+    - "db/**/*"
+    - "config/**/*"
+    - "lib/**/*"
+    - "bin/**/*"
