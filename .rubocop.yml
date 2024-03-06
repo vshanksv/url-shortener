@@ -20,6 +20,12 @@ Style/FrozenStringLiteralComment:
 Style/BlockComments:
   Enabled: false
 
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
 AllCops:
   NewCops: disable
   Exclude:
