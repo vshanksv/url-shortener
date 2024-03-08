@@ -25,11 +25,15 @@ module V1
     end
 
     def redirect
-      @short_link = ShortLink.find_by(short_url: params[:shorten_url])
-      if @short_link.present?
+      short_url = params[:shorten_url]
+      cached_data = $redis.get(short_url)
+      target_url = cached_data || ShortLink.find_by(short_url: params[:shorten_url])&.target_url
+      $redis.set(short_url, target_url) if cached_data.blank?
+
+      if target_url.present?
         ip_addr = Rails.env.production? ? request.remote_ip : Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
-        ImpressionJob.perform_async(ip_addr, @short_link.id)
-        redirect_to @short_link.target_url, allow_other_host: true
+        ImpressionJob.perform_async(ip_addr, short_url)
+        redirect_to target_url, allow_other_host: true
       else
         render file: Rails.root.join('public/404.html').to_s, status: :not_found
       end
