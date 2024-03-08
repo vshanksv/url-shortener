@@ -1,5 +1,5 @@
 <%= form_with model: @short_link, url: v1_short_links_path, class: "max-w-md mx-auto" do |form| %>
   <%= form.label :target_url_label, "Enter the URL you want to shorten", class: "block text-gray-700 text-sm font-bold mb-2" %>
-  <%= form.url_field :target_url, required: true, autofocus: true, placeholder: "https://www.wikipedia.org", class: "w-full p-2 border border-gray-300 rounded mb-4" %>
+  <%= form.text_field :target_url, required: true, autofocus: true, placeholder: "https://www.wikipedia.org", class: "w-full p-2 border border-gray-300 rounded mb-4" %>
   <%= form.submit 'Shorten URL', class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full" %>
 <% end %>

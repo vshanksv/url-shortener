@@ -49,6 +49,7 @@ gem "bootsnap", require: false
 
 gem 'config'
 gem 'database_validations'
+gem 'mechanize'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

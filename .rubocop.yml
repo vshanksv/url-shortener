@@ -26,6 +26,12 @@ RSpec/MultipleExpectations:
 RSpec/ExampleLength:
   Enabled: false
 
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
 AllCops:
   NewCops: disable
   Exclude:

@@ -12,8 +12,8 @@ module V1
 
     def create
       @short_link = ShortLink.new(short_link_params)
+      prepend_http_if_needed(@short_link)
       result = ShortenUrlService.call(@short_link)
-
       if result.success?
         respond_to do |format|
           format.html { redirect_to v1_short_link_path(@short_link) }
@@ -37,6 +37,11 @@ module V1
 
     def short_link_params
       params.require(:short_link).permit(:target_url)
+    end
+
+    def prepend_http_if_needed(model)
+      target_url = model.target_url
+      model.target_url = "https://#{target_url}" unless target_url.start_with?('http://', 'https://')
     end
   end
 end
