@@ -1,6 +1,6 @@
 module V1
   class ShortLinksController < ApplicationController
-    before_action :current_user
+    before_action :current_user, except: :redirect
 
     def new
       @short_link = ShortLink.new
@@ -27,6 +27,8 @@ module V1
     def redirect
       @short_link = ShortLink.find_by(short_url: params[:shorten_url])
       if @short_link.present?
+        ip_addr = Rails.env.production? ? request.remote_ip : Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
+        ImpressionJob.perform_async(ip_addr, @short_link.id)
         redirect_to @short_link.target_url, allow_other_host: true
       else
         render file: Rails.root.join('public/404.html').to_s, status: :not_found

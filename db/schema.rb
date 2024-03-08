@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_07_131941) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_08_085628) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "short_link_facts", force: :cascade do |t|
+    t.string "short_url"
+    t.integer "user_id"
+    t.string "ip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "created_at"], name: "index_short_link_facts_on_user_id_and_created_at"
+  end
 
   create_table "short_links", force: :cascade do |t|
     t.string "target_url"
