@@ -15,8 +15,8 @@ module TokenService
       access_token = JwtHelper.encode({ user_id: user_api_key.user_id })
       refresh_token = JwtHelper.encode({ user_id: user_api_key.user_id }, 1.week.from_now.to_i)
       success({ access_token:, refresh_token:,
-                expires_at: 1.day.from_now.to_i,
-                refresh_expires_at: 1.week.from_now.to_i })
+                expires_in: 1.day.from_now.to_i,
+                refresh_expires_in: 1.week.from_now.to_i })
     end
   end
 end

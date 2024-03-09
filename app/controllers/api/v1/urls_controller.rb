@@ -11,13 +11,18 @@ module Api
         if result.success?
           render json: UrlPairPresenter.new(result.response).massage_data, status: :created
         else
-          render json: result.response, status: :unprocessable_entity
+          render json: { error_message: result.response, error_type: 'invalid' }, status: :unprocessable_entity
         end
       end
 
       private
 
       def prepend_http_if_needed
+        if params[:target_url].blank?
+          return render json: { error_message: 'target_url is required', error_type: 'invalid' },
+                        status: :unprocessable_entity
+        end
+
         params[:target_url] = "https://#{params[:target_url]}" unless params[:target_url].start_with?('http://', 'https://')
       end
     end

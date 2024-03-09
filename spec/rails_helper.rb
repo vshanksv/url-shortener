@@ -37,6 +37,7 @@ end
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Features::SessionHelpers, type: :feature
+  config.include Requests::ApiHelpers
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
