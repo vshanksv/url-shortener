@@ -49,7 +49,10 @@ gem "bootsnap", require: false
 
 gem 'config'
 gem 'database_validations'
+gem 'draper'
+gem 'geocoder'
 gem 'mechanize'
+gem 'pagy'
 gem 'sidekiq'
 
 group :development, :test do

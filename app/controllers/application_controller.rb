@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
+
   private
 
   def current_user
@@ -24,5 +26,11 @@ class ApplicationController < ActionController::Base
   def logout
     Current.user = nil
     reset_session
+  end
+
+  def authenticate_user!
+    return if user_signed_in?
+
+    render file: Rails.root.join('public/401.html').to_s, status: :unauthorized
   end
 end

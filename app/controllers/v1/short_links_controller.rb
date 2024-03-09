@@ -26,9 +26,9 @@ module V1
 
     def redirect
       short_url = params[:shorten_url]
-      cached_data = $redis.get(short_url)
+      cached_data = RedisSingleton.instance.client.get(short_url)
       target_url = cached_data || ShortLink.find_by(short_url: params[:shorten_url])&.target_url
-      $redis.set(short_url, target_url) if cached_data.blank?
+      RedisSingleton.instance.client.set(short_url, target_url) if cached_data.blank?
 
       if target_url.present?
         ip_addr = Rails.env.production? ? request.remote_ip : Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish

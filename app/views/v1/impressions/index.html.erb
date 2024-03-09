@@ -1,0 +1,43 @@
+<div class="grid grid-cols-3 gap-4">
+  <div class="grid grid-cols-subgrid gap-4 col-span-3 col-start-2">
+    <%= form_for(:search, url: v1_impressions_path, method: :get) do |form| %>
+      <div class="mb-4">
+        <%= form.label :start_date, class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.date_field :start_date, max: DateTime.now.end_of_day, required: true, class: "border border-gray-300 p-2 w-full" %>
+      </div>
+      <div class="mb-4">
+        <%= form.label :end_date, class: "block text-gray-700 text-sm font-bold mb-2" %>
+        <%= form.date_field :end_date, max: DateTime.now.end_of_day, required: true, class: "border border-gray-300 p-2 w-full" %>
+      </div>
+      <div class="text-center">
+        <%= form.submit "Search", class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="grid grid-cols-subgrid gap-4 col-span-3 col-start-2">
+    <table class="table-auto mx-auto">
+      <thead>
+      <tr>
+        <th class="px-4 py-2">Short URL</th>
+        <th class="px-4 py-2">No. of Clicks</th>
+        <th class="px-4 py-2">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @impression_reports.each do |ele| %>
+        <tr>
+          <td class="border px-4 py-2"><%= link_to ele.key, domain_url(ele.key) %></td>
+          <td class="border px-4 py-2"><%= ele.value %></td>
+          <td class="border px-4 py-2"><%= link_to "Details", v1_impression_path(ele.key), class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="grid grid-cols-subgrid gap-4 col-span-3 col-start-2">
+    <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+  </div>
+</div>
+

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resource :session
     resource :registration
     resources :short_links
+    resources :impressions
   end
 
   get ":shorten_url", to: "v1/short_links#redirect"
