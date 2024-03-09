@@ -13,6 +13,15 @@ Rails.application.routes.draw do
     resource :registration
     resources :short_links
     resources :impressions
+    resources :user_api_keys
+  end
+
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      post "token/access", to: "tokens#create"
+      post "token/refresh", to: "tokens#refresh"
+      post "url/shorten", to: "urls#create"
+    end
   end
 
   get ":shorten_url", to: "v1/short_links#redirect"
