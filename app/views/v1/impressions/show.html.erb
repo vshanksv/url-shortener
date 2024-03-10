@@ -19,7 +19,7 @@
   </div>
 
   <div class="grid grid-cols-subgrid gap-4 col-span-3 col-start-2">
-    <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    <%= paginate @impressions %>
   </div>
 </div>
 

@@ -8,15 +8,15 @@ module V1
       result = ImpressionReportService.call(@search)
 
       if result.success?
-        @pagy, @impression_reports = pagy_array(ImpressionReportPresenter.new(result.response).massage_data)
+        @impression_reports = Kaminari.paginate_array(ImpressionReportPresenter.new(result.response).massage_data)
+                                      .page(params[:page]).per(10)
       else
         render file: Rails.root.join('public/empty_table.html').to_s, status: :not_found
       end
     end
 
     def show
-      @pagy, @impressions = pagy(ShortLinkFact.where(short_url: params[:id]).order(created_at: :desc))
-      @impressions = @impressions.decorate
+      @impressions = ShortLinkFact.where(short_url: params[:id]).order(created_at: :desc).page(params[:page]).decorate
     end
   end
 end

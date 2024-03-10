@@ -52,8 +52,8 @@ gem 'database_validations'
 gem 'draper'
 gem 'geocoder'
 gem 'jwt'
+gem 'kaminari'
 gem 'mechanize'
-gem 'pagy'
 gem 'sidekiq'
 
 group :development, :test do
