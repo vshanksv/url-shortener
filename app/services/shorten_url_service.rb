@@ -8,6 +8,9 @@ class ShortenUrlService
   end
 
   def call
+    rate_result = RateLimitingService.call(60, 60, 5)
+    return failure(rate_result.response) unless rate_result.success?
+
     unique_key = SecureRandom.urlsafe_base64(6)
     short_link.short_url = unique_key
     short_link.user = Current.user

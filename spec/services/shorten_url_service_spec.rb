@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe ShortenUrlService do
   let!(:existing_short_link) { create(:short_link) }
-  let(:short_link) { build(:short_link) }
+  let(:short_link) { build(:short_link, target_url: "https://www.example.com/") }
 
   context 'when short_url is duplicated' do
     it 'failure' do
