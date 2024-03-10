@@ -19,17 +19,17 @@
     <table class="table-auto mx-auto">
       <thead>
       <tr>
+        <th class="px-4 py-2">Target URL</th>
         <th class="px-4 py-2">Short URL</th>
         <th class="px-4 py-2">No. of Clicks</th>
-        <th class="px-4 py-2">Action</th>
       </tr>
       </thead>
       <tbody>
       <% @impression_reports.each do |ele| %>
         <tr>
-          <td class="border px-4 py-2"><%= link_to ele.key, domain_url(ele.key) %></td>
+          <td class="border px-4 py-2"><%= ele.target_url %></td>
+          <td class="border px-4 py-2"><%= link_to ele.short_url, domain_url(ele.short_url), target: '_blank' %></td>
           <td class="border px-4 py-2"><%= ele.value %></td>
-          <td class="border px-4 py-2"><%= link_to "Details", v1_impression_path(ele.key), class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %></td>
         </tr>
       <% end %>
       </tbody>

@@ -7,12 +7,10 @@ RSpec.describe Api::V1::UrlsController, type: :request do
   let(:params) { { target_url: } }
 
   describe 'POST /api/v1/url/shorten' do
-    subject(:shorten_request) { post '/api/v1/url/shorten', params:, headers: }
+    before { post '/api/v1/url/shorten', params:, headers: }
 
     context 'when target_url is valid' do
       it 'returns success response and create short link' do
-        shorten_request_subject
-
         expect(response.status).to eq 201
         expect(json).to include('short_url', 'target_url')
       end
@@ -22,8 +20,6 @@ RSpec.describe Api::V1::UrlsController, type: :request do
       let(:target_url) { 'example' }
 
       it 'returns unprocessable_entity response' do
-        shorten_request_subject
-
         expect(response.status).to eq 422
         expect(json).to include('error_message', 'error_type')
       end
@@ -33,8 +29,6 @@ RSpec.describe Api::V1::UrlsController, type: :request do
       let(:params) { {} }
 
       it 'returns unprocessable_entity response' do
-        shorten_request_subject
-
         expect(response.status).to eq 422
         expect(json).to include('error_message', 'error_type')
       end

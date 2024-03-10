@@ -6,10 +6,8 @@ class ImpressionReportPresenter
   end
 
   def massage_data
-    impression_reports = []
-    impressions_in_hash.each do |key, value|
-      impression_reports << OpenStruct.new(key:, value:)
+    impressions_in_hash.map do |(short_url, target_url, created_at), value|
+      OpenStruct.new(short_url:, target_url:, created_at:, value:)
     end
-    impression_reports
   end
 end

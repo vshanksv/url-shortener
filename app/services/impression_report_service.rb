@@ -11,9 +11,9 @@ class ImpressionReportService
     start_date = search.start_date.to_date.beginning_of_day
     end_date = search.end_date.to_date.end_of_day
     impression_reports = if Current.user&.admin?
-                           ShortLinkFact.count_by_short_url(start_date, end_date)
+                           ShortLink.with_impression_created_between(start_date, end_date)
                          else
-                           ShortLinkFact.by_user(Current.user.id).count_by_short_url(start_date, end_date)
+                           ShortLink.by_user(Current.user.id).with_impression_created_between(start_date, end_date)
                          end
     impression_reports.present? ? success(impression_reports) : failure("No data found.")
   rescue StandardError => e

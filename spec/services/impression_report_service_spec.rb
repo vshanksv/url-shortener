@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe ImpressionReportService do
-  subject(:report_service) { described_class.call(search) }
-
   let(:search) { OpenStruct.new(start_date: 3.months.ago, end_date: DateTime.now) }
   let(:other_user) { create(:user, :consumer) }
 
@@ -21,7 +19,7 @@ describe ImpressionReportService do
     end
 
     it 'return all short link within the date range' do
-      response = report_service_subject
+      response = described_class.call(search)
 
       expect(response).to be_success
       expect(response.response.keys.size).to eq(3)
@@ -40,7 +38,7 @@ describe ImpressionReportService do
     end
 
     it 'return the short link created within the date range by the user only' do
-      response = report_service_subject
+      response = described_class.call(search)
 
       expect(response).to be_success
       expect(response.response.keys.size).to eq(1)
