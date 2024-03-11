@@ -32,7 +32,7 @@ module V1
 
       if target_url.present?
         ip_addr = Rails.env.production? ? request.remote_ip : Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
-        ImpressionJob.perform_async(ip_addr, short_url)
+        ImpressionJob.new.perform(ip_addr, short_url)
         redirect_to target_url, allow_other_host: true
       else
         render file: Rails.root.join('public/404.html').to_s, status: :not_found
