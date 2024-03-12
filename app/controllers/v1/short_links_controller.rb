@@ -32,6 +32,7 @@ module V1
 
       if target_url.present?
         ip_addr = Rails.env.production? ? request.remote_ip : Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
+        # change impression job to run synchronously because redis usage exceed the free tier quota
         ImpressionJob.new.perform(ip_addr, short_url)
         redirect_to target_url, allow_other_host: true
       else
