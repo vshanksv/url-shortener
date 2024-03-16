@@ -11,7 +11,9 @@ module V1
         @impression_reports = Kaminari.paginate_array(ImpressionReportPresenter.new(result.response).massage_data)
                                       .page(params[:page]).per(10)
       else
-        render file: Rails.root.join('public/empty_table.html').to_s, status: :not_found
+        return redirect_to v1_empty_table_path if result.response[:error_code] == "empty_table"
+
+        redirect_to v1_impressions_path, alert: result.response[:error_message]
       end
     end
 

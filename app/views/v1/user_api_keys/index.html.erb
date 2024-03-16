@@ -1,9 +1,9 @@
-<!--<div class="max-w-sm mx-auto">-->
+<div class="px-6 py-8 mx-24 border">
 <%= turbo_frame_tag "new_api_key_frame" do %>
   <!-- Header -->
   <div class="flex justify-between items-center mb-8">
     <h2 class="text-4xl font-extrabold dark p-4">API Keys</h2>
-    <%= button_to "Generate API Key",
+    <%= button_to "Generate",
                   v1_user_api_keys_path,
                   method: :post,
                   data: { turbo_frame: "api_keys_frame" },
@@ -14,4 +14,4 @@
 <%= turbo_frame_tag "api_keys_frame" do %>
   <%= render @user_api_keys %>
 <% end %>
-<!--</div>-->
+</div>

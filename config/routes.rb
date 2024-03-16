@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :short_links
     resources :impressions
     resources :user_api_keys
+    get "empty_table", to: "impressions#empty_table"
   end
 
   namespace :api, defaults: { format: :json } do

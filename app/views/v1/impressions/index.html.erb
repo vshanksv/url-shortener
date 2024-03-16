@@ -1,5 +1,6 @@
-<div class="grid grid-cols-3 gap-4">
-  <div class="grid grid-cols-subgrid gap-4 col-span-3 col-start-2">
+<div class="flex flex-col justify-center items-center">
+  <div class="p-4 w-96">
+    <%= render '/v1/partials/alert' %>
     <%= form_for(:search, url: v1_impressions_path, method: :get) do |form| %>
       <div class="mb-4">
         <%= form.label :start_date, class: "block text-gray-700 text-sm font-bold mb-2" %>
@@ -10,33 +11,35 @@
         <%= form.date_field :end_date, max: DateTime.now.end_of_day, required: true, class: "border border-gray-300 p-2 w-full" %>
       </div>
       <div class="text-center">
-        <%= form.submit "Search", class: "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+        <%= form.submit "Search", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
       </div>
     <% end %>
   </div>
 
-  <div class="grid grid-cols-subgrid gap-4 col-span-3 col-start-2">
+  <div class="p-4">
     <table class="table-auto mx-auto">
-      <thead>
+      <thead class="uppercase bg-blue-500 text-white">
       <tr>
         <th class="px-4 py-2">Target URL</th>
         <th class="px-4 py-2">Short URL</th>
         <th class="px-4 py-2">No. of Clicks</th>
+        <th class="px-4 py-2">Action</th>
       </tr>
       </thead>
       <tbody>
       <% @impression_reports.each do |ele| %>
         <tr>
           <td class="border px-4 py-2"><%= ele.target_url %></td>
-          <td class="border px-4 py-2"><%= link_to ele.short_url, domain_url(ele.short_url), target: '_blank' %></td>
+          <td class="border px-4 py-2"><%= link_to ele.short_url, domain_url(ele.short_url), class: "text-sm font-semibold text-blue-600 hover:text-blue-800 hover:underline", target: '_blank' %></td>
           <td class="border px-4 py-2"><%= ele.value %></td>
+          <td class="border px-4 py-2"><%= button_to 'View', v1_impression_path(ele.short_url), method: :get, class: ele.value == 0 ? "text-sm font-semibold text-blue-600 hover:text-blue-800 line-through" : "text-sm font-semibold text-blue-600 hover:text-blue-800", disabled: ele.value == 0 %></td>
         </tr>
       <% end %>
       </tbody>
     </table>
   </div>
 
-  <div class="grid grid-cols-subgrid gap-4 col-span-3 col-start-2">
+  <div class="p-4">
     <%= paginate @impression_reports %>
   </div>
 </div>
