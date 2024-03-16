@@ -43,5 +43,3 @@ config/environments/*.local.yml
 
 .idea
 .byebug_history
-
-node_modules

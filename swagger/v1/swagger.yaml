@@ -64,10 +64,10 @@ paths:
               required:
               - target_url
 servers:
-- url: http://{defaultHost}
+- url: https://{defaultHost}
   variables:
     defaultHost:
-      default: 127.0.0.1:3000/
+      default: crypto-alert-teamray.koyeb.app/
 components:
   securitySchemes:
     bearerAuth:
