@@ -1,1 +1,4 @@
 domain_url: 'https://crypto-alert-teamray.koyeb.app/'
+rswag:
+  protocol: 'https'
+  host: 'crypto-alert-teamray.koyeb.app/'

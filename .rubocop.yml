@@ -26,6 +26,14 @@ RSpec/MultipleExpectations:
 RSpec/ExampleLength:
   Enabled: false
 
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - "spec/requests/**/*"
+  
+RSpec/VariableName:
+  Exclude:
+    - "spec/requests/**/*"
+
 Metrics/MethodLength:
   Enabled: false
 

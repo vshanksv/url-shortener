@@ -1,5 +1,6 @@
 <div class="w-full md:w-96 md:max-w-full mx-auto">
   <div class="p-6 border border-gray-300 sm:rounded-md">
+    <h1 class="text-2xl font-bold py-4">Title: <%= @short_link.title.present? ? @short_link.title : 'unknown' %></h1>
     <h1 class="text-2xl font-bold py-4">Original URL</h1>
     <input type="text" value="<%= @short_link.target_url %>" class="bg-gray-50 border border-gray-300 text-gray-500 text-sm rounded-lg block w-full px-2.5 py-4" disabled readonly>
 
@@ -21,8 +22,10 @@
         </span>
       </button>
     </div>
+    <div class="flex pt-4">
+      <%= link_to "Visit URL", domain_url(@short_link.short_url), target: "_blank", class: "bg-green-500 hover:bg-green-700 text-white text-center font-bold py-2 px-4 rounded w-full" %>
+    </div>
     <div class="pt-4">
-      <%#= link_to "Visit URL", domain_url(@short_link.short_url), target: "_blank", class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" %>
       <%= button_to "Shorten another", new_v1_short_link_path, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full" %>
     </div>
   </div>

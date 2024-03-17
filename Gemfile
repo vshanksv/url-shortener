@@ -54,6 +54,8 @@ gem 'geocoder'
 gem 'jwt'
 gem 'kaminari'
 gem 'mechanize'
+gem 'rswag-api'
+gem 'rswag-ui'
 gem 'sidekiq'
 gem 'strong_migrations'
 
@@ -65,6 +67,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem 'faker'
   gem "rspec-rails"
+  gem 'rswag-specs'
   gem 'rubocop', require: false
   gem 'rubocop-faker', require: false
   gem 'rubocop-performance', require: false

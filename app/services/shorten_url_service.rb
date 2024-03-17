@@ -14,7 +14,7 @@ class ShortenUrlService
     unique_key = SecureRandom.urlsafe_base64(6)
     short_link.short_url = unique_key
     short_link.user = Current.user
-    short_link.title = Mechanize.new.get(short_link.target_url).title
+    short_link.title = retrieve_title
 
     if short_link.save
       success(short_link)
@@ -24,5 +24,14 @@ class ShortenUrlService
   rescue StandardError => e
     Rails.logger.error("Failed to shorten URL. #{e.message}")
     failure("Invalid URL. Failed to shorten URL.")
+  end
+
+  private
+
+  def retrieve_title
+    Mechanize.new.get(short_link.target_url).title
+  rescue StandardError => e
+    Rails.logger.error("Failed to get title. #{e.message}")
+    nil
   end
 end

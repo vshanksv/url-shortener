@@ -70,6 +70,7 @@ Software versions as of 11 March 2024
 2. Install the dependencies
     ```sh
     bundle install
+    npm install
     ```
    
 3. Create the database
@@ -83,7 +84,10 @@ Software versions as of 11 March 2024
     rails db:migrate
    
     # Check the status of the migrations
-    rails db:migrate:status  
+    rails db:migrate:status
+   
+    # Seed the database
+    rails db:seed  
     ```
    
 5. Start the server
@@ -139,6 +143,7 @@ The following are the non-functional requirements of the application:
 - Maintainability: The application should be maintainable and adaptable to changes
 
 ## REST Endpoints ##
+> You can visit the API docs [here](https://crypto-alert-teamray.koyeb.app/api-docs/index.html).
 1. POST /api/v1/token/access
 > Return token and token validity in response. The token must be passed in the header of subsequent short url API
 - No authentication required
