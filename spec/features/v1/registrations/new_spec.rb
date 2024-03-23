@@ -6,6 +6,6 @@ describe 'V1::Registrations#new', type: :feature do
   end
 
   it 'registration form' do
-    expect(page).to have_button('Sign Up')
+    expect(page).to have_button('Create an account')
   end
 end

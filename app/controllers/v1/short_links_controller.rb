@@ -7,7 +7,10 @@ module V1
     end
 
     def show
-      @short_link = ShortLink.find(params[:id])
+      @short_link = ShortLink.find_by(id: params[:id])
+      return if Current.user&.id == @short_link&.user_id || Current.user&.admin?
+
+      render file: Rails.root.join('public/401.html').to_s, status: :unauthorized
     end
 
     def create

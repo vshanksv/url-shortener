@@ -8,19 +8,19 @@ describe 'V1::Sessions#create', type: :feature do
   end
 
   it 'logins' do
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: user.password
+    fill_in 'email', with: user.email
+    fill_in 'password', with: user.password
 
-    click_on 'Login'
+    click_on 'Sign in'
 
     expect(page).to have_content('Sign Out')
   end
 
   it 'does not login' do
-    fill_in 'Email', with: user.email
-    fill_in 'Password', with: 'wrong password'
+    fill_in 'email', with: user.email
+    fill_in 'password', with: 'wrong password'
 
-    click_on 'Login'
+    click_on 'Sign in'
 
     expect(page).to have_content('Invalid email or password')
   end

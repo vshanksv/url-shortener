@@ -20,10 +20,10 @@ describe 'V1::UserApiKeys#index', type: :feature do
       visit v1_user_api_keys_path
 
       expect do
-        click_on "Generate API Key"
+        click_on "Generate"
       end.to change(UserApiKey, :count).by(1)
 
-      expect(page).to have_content("Generate API Key")
+      expect(page).to have_content("Generate")
     end
   end
 end

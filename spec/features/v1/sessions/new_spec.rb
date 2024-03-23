@@ -6,6 +6,6 @@ describe 'V1::Sessions#new', type: :feature do
   end
 
   it 'login form' do
-    expect(page).to have_button('Login')
+    expect(page).to have_button('Sign in')
   end
 end

@@ -18,6 +18,10 @@ module V1
     end
 
     def show
+      if Current.user.consumer? && Current.user.id != ShortLink.find_by(short_url: params[:id])&.user_id
+        return render file: Rails.root.join('public/401.html').to_s, status: :unauthorized
+      end
+
       @impressions = ShortLinkFact.where(short_url: params[:id]).order(created_at: :desc).page(params[:page]).decorate
     end
   end

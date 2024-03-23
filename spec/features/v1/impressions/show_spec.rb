@@ -2,7 +2,8 @@ require 'rails_helper'
 
 describe 'V1::Impressions#show', type: :feature do
   let(:user) { create(:user) }
-  let!(:short_link_fact) { create(:short_link_fact, :with_short_link, user_id: user.id) }
+  let(:short_link) { create(:short_link, user:) }
+  let!(:short_link_fact) { create(:short_link_fact, short_link:) }
 
   context 'when unauthorized' do
     it 'show unauthorized message' do

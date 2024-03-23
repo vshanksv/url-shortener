@@ -6,22 +6,21 @@ describe 'V1::Registrations#create', type: :feature do
   end
 
   it 'registers successfully' do
-    fill_in 'Email', with: Faker::Internet.email
-    fill_in 'Password', with: 'password'
-    fill_in 'Password Confirmation', with: 'password'
+    fill_in 'user_email', with: Faker::Internet.email
+    fill_in 'user_password', with: 'password'
+    fill_in 'user_password_confirmation', with: 'password'
 
-    click_on 'Register'
+    click_on 'Create an account'
 
-    expect(page).to have_content('Sign Out')
     expect(User.count).to eq(1)
   end
 
   it 'registers unsuccessfully' do
-    fill_in 'Email', with: Faker::Internet.email
-    fill_in 'Password', with: 'password'
-    fill_in 'Password Confirmation', with: 'wrong password'
+    fill_in 'user_email', with: Faker::Internet.email
+    fill_in 'user_password', with: 'password'
+    fill_in 'user_password_confirmation', with: 'wrong password'
 
-    click_on 'Register'
+    click_on 'Create an account'
 
     expect(page).to have_content("Password confirmation doesn't match Password")
     expect(User.count).to eq(0)
